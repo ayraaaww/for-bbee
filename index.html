@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For You Bbee</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
+        .card { background: #1e293b; border: 1px solid #334155; padding: 28px; border-radius: 20px; text-align: center; max-width: 400px; width: 100%; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3); z-index: 10; margin-bottom: 20px; }
+        h2 { font-weight: 600; font-size: 1.25rem; margin-bottom: 8px; color: #f1f5f9; }
+        p { color: #94a3b8; font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; }
+        input { width: 100%; padding: 12px 16px; background: #0f172a; border: 1px solid #334155; border-radius: 12px; color: #fff; font-size: 0.95rem; outline: none; text-align: center; margin-bottom: 12px; }
+        button { width: 100%; padding: 12px; background: #38bdf8; color: #0f172a; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; }
+        .hidden { display: none; }
+        .error { color: #fb7185; font-size: 0.8rem; margin-bottom: 12px; display: none; }
+        .intro-text { color: #e2e8f0; font-size: 0.95rem; line-height: 1.6; background: #0f172a; padding: 16px; border-radius: 12px; border: 1px solid #334155; margin-bottom: 20px; }
+        .content { color: #e2e8f0; font-size: 0.9rem; line-height: 1.6; text-align: left; background: #0f172a; padding: 16px; border-radius: 12px; border: 1px solid #334155; white-space: pre-line; margin-top: 15px; max-height: 40vh; overflow-y: auto; }
+        .heart { position: fixed; font-size: 20px; animation: float 4s linear; z-index: 1; pointer-events: none; }
+        @keyframes float { 0% { transform: translateY(100vh); opacity: 0; } 50% { opacity: 1; } 100% { transform: translateY(-10vh); opacity: 0; } }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="step1">
+        <h2 id="teksOpening">MAU TAU GA? 🤔</h2>
+        <button onclick="lanjutOpening()">Mau Tau!</button>
+    </div>
+
+    <div class="card hidden" id="step2">
+        <h2>Pesan Terkunci 🔒</h2>
+        <p>Masukkan tanggal jadian kita (format: 1632026):</p>
+        <input type="password" id="passInput" placeholder="Password...">
+        <div class="error" id="errorMsg">Password salah sayang! 😜</div>
+        <button onclick="unlock()">Buka Pesan</button>
+    </div>
+
+    <div class="card hidden" id="step3">
+        <h2>Special For You ✨</h2>
+        <audio id="bgMusic" loop src="https://files.catbox.moe/lif141.mp3"></audio>
+        
+        <div class="intro-text">
+            Sayang, ini alasan kenapa aku sayang sama kamu. Ini belum seberapa karena masih banyak tentang kamu yang bikin aku selalu sayang setiap harinya. 🥺❤️
+        </div>
+
+        <div class="content" id="message">Happy 5th monthiversary, sayang... [Isi pesan kamu tetap sama]</div>
+        
+        <h2 style="margin-top:20px;">100 Alasan Aku Sayang Bbee 💖</h2>
+        <div class="content" style="max-height: 30vh;">
+            <ol id="daftarAlasan" style="padding-left: 20px;"></ol>
+        </div>
+    </div>
+
+    <script>
+        const PASSWORD_BENAR = "1632026";
+        let tahapOpening = 1;
+
+        function lanjutOpening() {
+            const teks = document.getElementById("teksOpening");
+            if (tahapOpening === 1) { teks.innerText = "YAKIN MAU TAUUU? 🤭"; tahapOpening = 2; }
+            else if (tahapOpening === 2) { teks.innerText = "SERIUS GA NIH? ✨"; tahapOpening = 3; }
+            else { document.getElementById("step1").classList.add("hidden"); document.getElementById("step2").classList.remove("hidden"); }
+        }
+
+        const alasan = ["Karena bbee selalu ada meskipun jarak memisahkan.", "Karena suara bbee selalu bisa bikin aku tenang.", "Karena bbee selalu sabar dengerin keluh kesah aku.", "Karena bbee selalu perhatian meski lewat chat.", "Karena cara bbee bilang 'aku sayang kamu' itu tulus banget.", "Karena bbee selalu kasih semangat tiap aku capek.", "Karena bbee adalah rumah buat aku pulang.", "Karena bbee selalu jujur sama aku.", "Karena bbee selalu dukung cita-cita aku.", "Karena bbee selalu mau dengerin cerita gak penting aku.", "Karena bbee bikin hari-hari aku yang sepi jadi berwarna.", "Karena aku suka cara bbee ketawa di voice note.", "Karena bbee selalu nanyain 'sudah makan belum'.", "Karena bbee sabar banget sama sifat aku.", "Karena bbee nerima aku apa adanya.", "Karena kita punya banyak mimpi yang pengen kita capai.", "Karena setiap chat dari bbee selalu bikin aku senyum.", "Karena bbee itu partner terbaik buat diskusi.", "Karena bbee selalu ngerti kalau aku lagi bad mood.", "Karena bbee selalu punya cara buat bikin aku ketawa.", "Karena bbee adalah alasan aku bangun dengan semangat.", "Karena bbee selalu buat aku ngerasa spesial.", "Karena aku suka cara bbee ngehargai waktu kita.", "Karena bbee selalu sabar nungguin aku.", "Karena bbee selalu bisa kasih saran yang dewasa.", "Karena bbee itu unik dan gak ada duanya.", "Karena bbee bikin aku belajar arti kesetiaan.", "Karena bbee selalu manjain aku lewat kata-kata.", "Karena bbee selalu ingat hal-hal kecil.", "Karena bbee itu mood booster terbaik aku.", "Karena aku merasa aman pas cerita apa aja sama bbee.", "Karena bbee selalu bikin aku ngerasa gak sendirian.", "Karena bbee percaya sama aku.", "Karena bbee selalu jadi pendengar yang baik.", "Karena bbee selalu punya kata-kata manis.", "Karena bbee bikin aku percaya cinta jarak jauh itu mungkin.", "Karena bbee selalu ngertiin keadaan aku.", "Karena bbee itu inspirasi aku buat jadi lebih baik.", "Karena bbee selalu perhatian soal kesehatan aku.", "Karena bbee bikin dunia aku lebih luas.", "Karena bbee selalu menghargai perasaan aku.", "Karena bbee itu sosok yang luar biasa.", "Karena aku suka ketulusan bbee.", "Karena bbee bikin aku merasa cukup.", "Karena bbee selalu ada buat aku di saat tersulit.", "Karena bbee adalah anugerah terindah.", "Karena bbee bikin hari-hariku bermakna.", "Karena bbee selalu dukung hobby aku.", "Karena bbee itu orang yang sangat penyabar.", "Karena bbee bikin aku jadi manusia yang lebih baik.", "Karena bbee selalu kasih perhatian ekstra.", "Karena bbee bikin aku ngerasa diinginkan.", "Karena bbee selalu jaga kepercayaan kita.", "Karena bbee bikin aku bangga punya kamu.", "Karena bbee selalu tahu cara buat aku tenang.", "Karena bbee punya hati yang sangat lembut.", "Karena bbee selalu ngasih apresiasi buat hal kecil.", "Karena bbee bikin hubungan kita terasa nyata.", "Karena bbee selalu mau belajar bareng aku.", "Karena bbee bikin aku merasa dicintai seutuhnya.", "Karena bbee itu sahabat sekaligus pacar terbaik.", "Karena bbee bikin aku selalu rindu.", "Karena bbee selalu memberikan rasa nyaman.", "Karena bbee itu sangat pengertian.", "Karena bbee bikin aku merasa beruntung.", "Karena bbee selalu ada di doa-doa aku.", "Karena bbee itu sosok yang sangat luar biasa.", "Karena bbee bikin hidupku lebih berwarna.", "Karena bbee selalu memberikan dukungan moral.", "Karena bbee selalu menjaga perasaan kita.", "Karena bbee itu sangat penyayang.", "Karena bbee bikin aku selalu ingin jadi lebih baik.", "Karena bbee itu tempat aku berbagi segalanya.", "Karena bbee bikin aku ngerasa dihargai.", "Karena bbee selalu jujur apa adanya.", "Karena bbee bikin kita merasa dekat meski jauh.", "Karena bbee itu sosok yang sangat cerdas.", "Karena bbee bikin aku terus bersemangat.", "Karena bbee itu pendengar yang hebat.", "Karena bbee selalu memberikan rasa tenang.", "Karena bbee itu satu-satunya yang aku mau.", "Karena bbee bikin hari-hariku jadi istimewa.", "Karena bbee sangat peduli sama masa depan kita.", "Karena bbee bikin aku ngerasa sangat disayang.", "Karena bbee selalu memberikan rasa percaya diri.", "Karena bbee bikin aku merasa nyaman jadi diri sendiri.", "Karena bbee itu sangat pengertian dan baik hati.", "Karena bbee selalu kasih aku ruang untuk berkembang.", "Karena bbee itu sosok yang sangat tulus.", "Karena bbee selalu bikin aku bahagia.", "Karena bbee itu cinta pertama yang paling nyata.", "Karena bbee bikin hidupku jadi jauh lebih manis.", "Karena bbee itu segalanya buat aku.", "Karena bbee selalu buat aku merasa dimengerti.", "Karena bbee adalah alasan aku bertahan.", "Karena bbee itu belahan jiwaku.", "Karena aku sayang sama bbee lebih dari yang bisa dijelaskan.", "Karena bbee adalah segalanya bagiku.", "Karena bbee, aku jadi percaya keajaiban cinta.", "Karena bbee, aku merasa sangat sempurna."];
+
+        const list = document.getElementById('daftarAlasan');
+        alasan.forEach((item, i) => { const li = document.createElement('li'); li.innerText = item; list.appendChild(li); });
+
+        function unlock() {
+            if (document.getElementById("passInput").value === PASSWORD_BENAR) {
+                document.getElementById("step2").classList.add("hidden");
+                document.getElementById("step3").classList.remove("hidden");
+                document.getElementById("bgMusic").play();
+                setInterval(() => {
+                    const h = document.createElement("div"); h.className="heart"; h.innerHTML="❤️"; h.style.left = Math.random()*100+"vw"; document.body.appendChild(h); setTimeout(()=>h.remove(), 4000);
+                }, 400);
+            } else { document.getElementById("errorMsg").style.display = "block"; }
+        }
+    </script>
+</body>
+</html>
